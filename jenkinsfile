@@ -1,4 +1,4 @@
-pipelinr{
+pipeline{
     agent any
     stages{
         stage('checkout'){
@@ -23,8 +23,8 @@ pipelinr{
             steps{
                 echo 'run application....'
                 sh""" 
-                .myenv/bin/activate
-                python3 -m pytest --html==report.html
+                . myenv/bin/activate
+                python3 -m pytest --html=report.html
                 """
             }
         }
