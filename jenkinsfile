@@ -14,6 +14,7 @@ pipelinr{
                 sh""" 
                 python3 -m venv myenv
                 . myenv/bin/activate
+                git checkout test
                 pip install -r requirements.txt
                  """
             }
