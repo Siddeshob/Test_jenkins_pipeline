@@ -1,0 +1,41 @@
+pipelinr{
+    agent any
+    stages{
+        stage('checkout'){
+            steps{
+                echo 'cloning repo..'
+                checkout scm
+            }
+        }
+
+        stage('setup'){
+            steps{
+                echo 'local setup....'
+                sh""" 
+                python3 -m venv myenv
+                . myenv/bin/activate
+                git checkout test
+                pip install -r requirements.txt
+                 """
+            }
+        }
+        
+        stage('run application'){
+            steps{
+                echo 'run application....'
+                sh""" 
+                .myenv/bin/activate
+                python3 -m pytest --html==report.html
+                """
+            }
+        }
+    }
+    post{
+        success{
+            echo 'success....'
+        }
+        failure{
+            echo 'failure....'
+        }
+    }
+}
